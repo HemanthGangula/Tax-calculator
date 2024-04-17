@@ -15,8 +15,11 @@ This is a web application for calculating taxes based on annual gross income, ex
 To run the application locally:
 
 1. Clone this repository to your local machine.
-2. Navigate to the project directory.
-3. Open the `index.html` file in a web browser.
+```bash
+git clone https://github.com/AjayDattu/Tax-calculator.git
+cd Tax-calculator
+start index.html
+```
 
 ## Demo
 
@@ -24,17 +27,23 @@ You can view the live demo of the Tax Calculator web application [here](https://
 
 ## Screenshots
 
-![Screenshot 1](screenshots/screenshot1.png)
-![Screenshot 2](screenshots/screenshot2.png)
+
+![Screenshot 2024-04-17 120655](https://github.com/AjayDattu/Tax-calculator/assets/126608028/3926def0-c894-4988-bd75-06bae147e636)
+
+![Screenshot 2024-04-17 120723](https://github.com/AjayDattu/Tax-calculator/assets/126608028/41162419-8d32-4867-a484-07ab68652819)
 
 ## Tests
-
-![Tests Passing](screenshots/tests-passing.png)
-
+![Screenshot 2024-04-17 120758](https://github.com/AjayDattu/Tax-calculator/assets/126608028/ed1588eb-ef4c-4ea3-8bcd-ef63eaf9c86e)
 ## Contributing
 
-Contributions are welcome! Please feel free to open issues or submit pull requests.
+Contributions are welcome! Please feel free to open issues or submit pull requests.[MIT License]((https://github.com/AjayDattu)).
 
-## License
+## User Profile
 
-This project is licensed under the [MIT License](LICENSE).
+- **Name:** Ajay Dattu
+- **Location:** Bhimavaram
+- **Bio:** I'm Ajay Dattu, currently studying prefinal BTech. I'm passionate about coding and development, with a specialization in web development.
+- **GitHub:** [AjayDattu](https://github.com/AjayDattu)
+- **LinkedIn:** [Ajay Dattu](https://www.linkedin.com/in/ajaydattu005)
+
+
