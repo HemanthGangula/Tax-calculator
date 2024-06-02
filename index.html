@@ -6,8 +6,6 @@
 <title>Tax Calculator</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-<integrity-hash>" crossorigin="anonymous" />
-
-
 </head>
 <body>
  <div class="main">
@@ -29,7 +27,7 @@
                     <div id="tooltip">
                     <span id="tooltiptext">Enter Numerical Data</span>
                     <i class="fas fa-check-circle"></i> 
-                    <i class="fas fa-exclamation-circle" id="tooltip"></i></div>  <!-- Icon inside the text box -->
+                    <i class="fas fa-exclamation-circle" id="tooltip"></i></div>
                 </div>
             </div>
             <div class="form-control">
@@ -44,8 +42,8 @@
                     <input type="text" class="number" id="extraIncome" placeholder="Extra Income">
                     <div id="tooltip">
                     <span id="tooltiptext">Enter the Data</span> 
-                    <i class="fas fa-check-circle"></i> <!-- Icon inside the text box -->
-                    <i class="fas fa-exclamation-circle" id="tooltip"></i></div> <!-- Icon inside the text box -->
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle" id="tooltip"></i></div>
                 </div>
             </div>
             <div class="form-control">
@@ -61,10 +59,8 @@
                     <input type="text" class="number" id="deductions" placeholder="Deductions">
                     <div id="tooltip">
                         <span id="tooltiptext">Enter the Data</span>
-                        <i class="fas fa-check-circle"></i>  <!-- Icon inside the text box -->
-                        <i class="fas fa-exclamation-circle" id="tooltip"></i>
-                    </div>  <!-- Icon inside the text box -->
-                    <!-- Icon inside the text box -->
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle" id="tooltip"></i></div>
                 </div>
             </div>
             <div class="form-control">
@@ -79,21 +75,16 @@
                     <input type="text" class="number" id="age" placeholder="Age">
                     <div id="tooltip">
                         <span id="tooltiptext">Enter the Data</span>
-                        <i class="fas fa-check-circle"></i>  <!-- Icon inside the text box -->
-                        <i class="fas fa-exclamation-circle" id="tooltip"></i></div> <!-- Icon inside the text box -->
-                     <!-- Icon inside the text box -->
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle" id="tooltip"></i></div>
                 </div>
                 <div class="tooltip">
-                    <!-- Error tooltip -->
                     <small class="tooltiptext">Error message</small>
                 </div>
             </div>
             <input type="submit" value="Calculate Tax" id="submitbtn" onclick="showPopup(event)">
         </form>
-
     </div>
-
-    <!-- Popup div -->
     <div id="popupDiv" class="popup px-4 py-5 my-5 text-center">
         <i class="fas fa-check-circle"></i>
         <div class="inner">
@@ -102,36 +93,69 @@
         <p id="taxstatement"></p>
         <button id="inner-button" onclick="hidePopup()">Close</button>
     </div></div>
-        <!-- SOCIAL PANEL HTML -->
-        <div class="social-panel-container">
-            <div class="social-panel">
-                <p>Created with <i class="fa fa-heart"></i> by
-                    <a target="_blank" href="https://drive.google.com/file/d/1VQp9y9brob-eBkdRmrolz7gUMsREWTW4/view?usp=sharing">Ajay Dattu</a></p>
-                <button class="close-btn"><i class="fas fa-times"></i></button>
-                <h4>Get in touch on</h4>
-                <ul>
-                    <li>
-                        <a href="https://github.com/AjayDattu" target="_blank">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/in/ajaydattu005/" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </li>
-                   
-                    
-                </ul>
-            </div>
+    <div class="social-panel-container">
+        <div class="social-panel">
+            <p>Created with <i class="fa fa-heart"></i> by
+                <a target="_blank" href="https://drive.google.com/file/d/1VQp9y9brob-eBkdRmrolz7gUMsREWTW4/view?usp=sharing">Ajay Dattu</a></p>
+            <button class="close-btn"><i class="fas fa-times"></i></button>
+            <h4>Get in touch on</h4>
+            <ul>
+                <li>
+                    <a href="https://github.com/AjayDattu" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/ajaydattu005/" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <button class="floating-btn">
-            Get in Touch
-        </button>
-        
-       
+    </div>
+    <button class="floating-btn">
+        Get in Touch
+    </button>
 </div>
-   <!-- <script src="script.js"></script> -->
+<script>
+    const form = document.getElementById('form');
 
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const grossIncome = document.getElementById('grossIncome').value;
+        const extraIncome = document.getElementById('extraIncome').value;
+        const deductions = document.getElementById('deductions').value;
+        const age = document.getElementById('age').value;
+
+        fetch('https://fy4t1ovzl2.execute-api.us-east-1.amazonaws.com/Development', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                grossIncome: grossIncome,
+                extraIncome: extraIncome,
+                deductions: deductions,
+                age: age
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('taxAmount').innerText = data.taxAmount;
+            document.getElementById('taxstatement').innerText = data.taxStatement;
+            showPopup();
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    function showPopup() {
+        document.getElementById('popupDiv').style.display = 'block';
+    }
+
+    function hidePopup() {
+        document.getElementById('popupDiv').style.display = 'none';
+    }
+</script>
 </body>
 </html>
